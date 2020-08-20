@@ -1,7 +1,7 @@
 const http = require('http');
 
-const targetUri = 'http://10.10.10.191';
-const formPath = '/admin';
+const targetUri = 'api.xcrowzz.com';
+const formPath = '/login';
 const method = 'POST';
 
 
