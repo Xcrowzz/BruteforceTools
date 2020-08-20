@@ -11,7 +11,6 @@ const wordListFilePath = process.argv.slice(2);
 
 const genRandomIp = () => {
   return `192.168.1.${Math.floor(Math.random() * Math.floor(255))}`;
-
 }
 
 const getCSRFToken = (page) => {
@@ -20,26 +19,23 @@ const getCSRFToken = (page) => {
 }
 
 const getPage = () => {
-  console.log('Getting page');
+  console.log('Getting page.');
   let rawData = '';
-  const req = http.get(targetUri, (res => {
+  http.get(targetUri, (res => {
     res.on('data', (chunk) => {
       console.log('Writing chunk');
       rawData += chunk;
     });
     res.on('end', () => {
       console.log('No more data in response.');
-      try {
-        return getCSRFToken(rawData);
-      } catch (e) {
-        console.error(e.message);
-      }
+      return getCSRFToken(rawData);
     });
   })).on('error', (e) => {
     console.error(`Something fucky happened there: ${e.message}`);
   });
 }
 
+// TODO
   const getWordListEntry = () => {
 
 }
