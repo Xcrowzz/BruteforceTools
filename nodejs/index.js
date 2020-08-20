@@ -64,7 +64,7 @@ const buildRequest = async (entry) => {
 
 const main = () => {
   console.log(`Let's go!`);
-  buildRequest('test').then(r => console.log(r)).catch(e => console.log(e));
+  buildRequest('test').then(r => console.log(`r= ${r}`)).catch(e => console.log(e));
 }
 
 main();
