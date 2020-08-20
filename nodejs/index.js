@@ -13,7 +13,8 @@ const genRandomIp = () => {
   return `192.168.1.${Math.floor(Math.random() * Math.floor(255))}`;
 }
 
-const getCSRFToken = (page) => {
+const getCSRFToken = () => {
+  const page = getPage();
   console.log('Fetching CSRF Token for bypass');
   return page.match(rx);
 }
@@ -28,7 +29,7 @@ const getPage = () => {
     });
     res.on('end', () => {
       console.log('No more data in response.');
-      return getCSRFToken(rawData);
+      return rawData;
     });
   })).on('error', (e) => {
     console.error(`Something fucky happened there: ${e.message}`);
