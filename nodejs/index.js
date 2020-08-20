@@ -13,8 +13,8 @@ const genRandomIp = () => {
   return `192.168.1.${Math.floor(Math.random() * Math.floor(255))}`;
 }
 
-const getCSRFToken = () => {
-  const page = getPage();
+const getCSRFToken = async () => {
+  const page = await getPage();
   console.log('Fetching CSRF Token for bypass');
   return page.match(rx);
 }
