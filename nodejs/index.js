@@ -64,7 +64,7 @@ const buildRequest = (entry) => {
 
 const main = () => {
   console.log(`Let's go!`);
-  buildRequest('test').then(r => console.log(`r= ${r}`)).catch(e => console.log(e));
+  buildRequest('test');
 }
 
 main();
