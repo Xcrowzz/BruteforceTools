@@ -49,7 +49,7 @@ const launch = (options, payload) => {
 
 }
 
-const buildRequest = async (entry) => {
+const buildRequest = (entry) => {
   const options = {
     host: targetUri,
     path: formPath,
@@ -58,8 +58,8 @@ const buildRequest = async (entry) => {
       'X-Forwarded-For': genRandomIp(),
     }
   }
-  const payload = { username, entry, tokenCSRF: await getCSRFToken(), save: '', 'allow_redirects': false }.toString();
-  await launch(options, payload);
+  const payload = { username, entry, tokenCSRF: getCSRFToken(), save: '', 'allow_redirects': false }.toString();
+  launch(options, payload);
 }
 
 const main = () => {
